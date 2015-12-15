@@ -17,8 +17,12 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-    # +++your code here+++
-    return
+    if len(s) >= 3 and not s.endswith('ing'):
+        return s + 'ing'
+    elif s.endswith('ing'):
+        return s + 'ly'
+    else:
+        return s
 
 
 # E. not_bad
@@ -26,12 +30,22 @@ def verbing(s):
 # substring 'not' and 'bad'. If the 'bad' follows
 # the 'not', replace the whole 'not'...'bad' substring
 # with 'good'.
+
+# dada a string, encontrar a primeira aparição do
+# 'not' e 'bad'.
+# se 'bad' segue o 'not' substitua o conjunto 'not'...'bat'
+# por 'good'
+
 # Return the resulting string.
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
+# conseguir fazer via consulta ao git
 def not_bad(s):
-    # +++your code here+++
-    return
+    p_not = s.find('not')
+    p_bad = s.find('bad')
+    if p_bad > p_not:
+        return s[:p_not] + 'good' + s[(p_bad+3):]
+    return s
 
 
 # F. front_back
@@ -41,10 +55,13 @@ def not_bad(s):
 # e.g. 'abcde', the front half is 'abc', the back half 'de'.
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
-def front_back(a, b):
-    # +++your code here+++
-    return
 
+# Considere dividir uma string em duas metades
+# conseguir fazer via consulta ao git
+def front_back(a, b):
+    a_indx = int((len(a)+1)/2)
+    b_indx = int((len(b)+1)/2)
+    return a[:a_indx] + b[:b_indx] + a[a_indx:] + b[b_indx:]
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.

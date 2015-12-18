@@ -15,8 +15,7 @@
 # modify the passed in list.
 def remove_adjacent(nums):
     nA = int
-    for n in nums:
-        print(n)
+    for n in nums[:]:
         if n == nA:
             nums.remove(n)
         nA = n
@@ -28,8 +27,9 @@ def remove_adjacent(nums):
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
 def linear_merge(list1, list2):
-    # +++your code here+++
-    return
+    ret = list1 + list2
+    ret.sort()
+    return ret
 
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)

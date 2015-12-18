@@ -48,6 +48,54 @@ import sys
 
 ###
 
+def print_words(filename, boolean=True):
+    with open(filename) as arquivo:
+        dicionario = {}
+        palavras = arquivo.read().split()
+
+        # Transformo todas em minusculas
+        for i in range(len(palavras)):
+            palavras[i] = palavras[i].lower()
+
+        # Monto o dicionário
+        for i in range(len(palavras)):
+            # Se a palavra existe na chave do dicionario
+            if palavras[i] in dicionario.keys():
+                # Acrescento mais uma ocorrência
+                dicionario[palavras[i]] += 1
+            else:
+                # Senão uma nova é criada e a ocorrência e contada pela primeira vez
+                dicionario[palavras[i]] = 1
+
+        # Imprimo as palavras
+        if boolean == True:
+            for key, value in dicionario.items():
+                print('%s : %s' % (key, value))
+    return dicionario
+
+
+def print_top(filename):
+    dicionario = print_words(filename, boolean=False)
+    lista = []
+
+    # Organizo a lista de tuplas para que receba em ordem crescente
+    for key, value in dicionario.items():
+        lista.append((key, value))
+        result = sorted(lista, key=lambda a: a[-1], reverse=True)
+
+    # Imprimo o resultado
+    # Se for menor que 20 só imprimir
+    if len(result) <= 20:
+        for key, value in result:
+            print('%s : %s' % (key, value))
+    # Se maior que 20, entra no FOR para respeitar os 20
+    else:
+        for i in range(20):
+            key, value = result[i]
+            print('%s : %s' % (key, value))
+    return
+###
+
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():

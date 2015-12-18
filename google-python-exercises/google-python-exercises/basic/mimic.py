@@ -46,16 +46,42 @@ import sys
 
 
 def mimic_dict(filename):
-  """Returns mimic dict mapping each word to list of words which follow it."""
-  # +++your code here+++
-  return
+    # Abro o arquivo filename
+    with open(filename) as arquivo:
+        dicionario = {}
 
+        # Recebo o texto do arquivo como uma string gigante e transformo em uma lista com o split
+        # Dica do amigo de curso Adriano Regis me poupou fazer um laço for para retirar os \n
+        palavras = arquivo.read().split()
+
+        # Monto o dicionário
+        for i in range(len(palavras) - 1):
+            # Criamos uma lista para receber a palavra a frente
+            lista = [palavras[i + 1]]
+            # Se a palavra existe na chave do dicionario
+            if palavras[i] in dicionario.keys():
+                # Somente acrescento
+                dicionario[palavras[i]] += lista
+            else:
+                # Senão uma nova é criada
+                dicionario[palavras[i]] = lista
+    return dicionario
 
 def print_mimic(mimic_dict, word):
-  """Given mimic dict and start word, prints 200 random words."""
-  # +++your code here+++
-  return
-
+    # Cria uma lista para receber as chaves do dicionario
+    lista = []
+    lista += mimic_dict.keys()
+    # Itero a randomização 200 vezes
+    for i in range(200):
+        # Se a palavra está no dicionário, escolha aleatoriamente dentro da lista e imprima
+        if word in mimic_dict.keys():
+            proxima = random.choice(mimic_dict[word])
+            print(proxima, end=' ')
+        # Senão, escolha aleatoriamente uma KEY e chame aleatoriamente uma palavra
+        else:
+            proxima = random.choice(mimic_dict[random.choice(lista)])
+            print(proxima, end=' ')
+    return
 
 # Provided main(), calls mimic_dict() and mimic()
 def main():
